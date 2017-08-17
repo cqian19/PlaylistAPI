@@ -30,7 +30,12 @@ export default class BaseAPI {
     }
 
     static fetchKey() {
-        return { key: this.getKey() }
+        const keyPublic = DOMAIN_PROPS[this.DOMAIN_TYPE].public;
+        if (!keyPublic) {
+            return new Error("Key for this domain is private");
+        } else {
+            return { key: this.getKey() }
+        }
     }
 
     static fetchVideo(params) {}

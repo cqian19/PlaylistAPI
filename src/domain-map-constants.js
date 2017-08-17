@@ -14,22 +14,27 @@ import { DOMAIN_TYPES } from './constants';
 export const DOMAIN_PROPS = {
     [DOMAIN_TYPES.YOUTUBE]: {
         'API': YoutubeAPI,
-        'key': process.env.YOUTUBE_KEY
+        'key': process.env.YOUTUBE_KEY,
+        'public': false
     },
     [DOMAIN_TYPES.VIMEO]: {
         'API': VimeoAPI,
-        'key': process.env.VIMEO_KEY
+        'key': process.env.VIMEO_KEY,
+        'public': false
     },
     [DOMAIN_TYPES.SOUNDCLOUD]: {
         'API': SoundCloudAPI,
-        'key': process.env.SOUNDCLOUD_KEY
+        'key': process.env.SOUNDCLOUD_KEY,
+        'public': false
     },
     [DOMAIN_TYPES.FACEBOOK]: {
         'API': FacebookAPI,
-        'key': process.env.FACEBOOK_KEY
+        'key': process.env.FACEBOOK_KEY,
+        'public': true
     },
     [DOMAIN_TYPES.TWITCH]: {
         'API': TwitchAPI,
-        'key': process.env.TWITCH_KEY
+        'key': process.env.TWITCH_KEY,
+        'public': false
     }
 };
