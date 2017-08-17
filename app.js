@@ -1,4 +1,5 @@
 
+import axios from 'axios';
 import { APIManager } from './src/api/APIManager';
 import { Error } from './src/api';
 import { DOMAIN_TYPES, GET_TYPES } from './src/constants';
@@ -61,6 +62,12 @@ router.get('/:domain/:type', function(req, res) {
         res.json(response);
     }
 });
+
+// Keep awake
+setInterval(function() {
+    axios.get('https://allinoneplaylist.herokuapp.com');
+}, 1200000);
+
 app.listen(appPort);
 app.use('/api', router);
 console.log(`Listening on port ${appPort}`);
