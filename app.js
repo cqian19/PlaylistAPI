@@ -5,6 +5,7 @@ import { DOMAIN_TYPES, GET_TYPES } from './src/constants';
 
 const express = require('express');
 const logger = require('morgan');
+const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
 
 const appPort = process.env.PORT || 8080;
@@ -12,9 +13,17 @@ const appPort = process.env.PORT || 8080;
 const app = express();
 const router = express.Router();
 
+const limiter = new rateLimit({
+    windowMs: 15*60*1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    delayMs: 0 // disable delaying - full speed until the max limit is reached
+});
+
+// Rate limit setup
+app.use(limiter);
+
 // view engine setup
 app.set('view engine', 'html');
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -44,7 +53,7 @@ router.get('/:domain/:type', function(req, res) {
         });
     } else if (response instanceof Promise) {
         response.then(function(response) {
-            res.json({data: response.data});
+            res.json(response.data);
         }, function(error) {
             res.status(500).send(error.message)
         });
@@ -54,3 +63,4 @@ router.get('/:domain/:type', function(req, res) {
 });
 app.listen(appPort);
 app.use('/api', router);
+console.log(`Listening on port ${appPort}`);
