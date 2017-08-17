@@ -7,6 +7,8 @@ const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
+const appPort = process.env.PORT || 8080;
+
 const app = express();
 const router = express.Router();
 
@@ -28,8 +30,7 @@ app.use(function(req, res, next) {
 */
 
 router.get('/', function(req, res){
-    console.log("HELLO");
-    res.json({ message: 'hooray! welcome to our api!' });
+    res.json({ message: 'Playlist API' });
 });
 
 
@@ -52,5 +53,5 @@ router.get('/:domain/:type', function(req, res) {
         res.json(response);
     }
 });
-
+app.listen(appPort);
 app.use('/api', router);
