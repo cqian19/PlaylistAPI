@@ -25,7 +25,7 @@ export const DOMAIN_PROPS = {
     [DOMAIN_TYPES.SOUNDCLOUD]: {
         'API': SoundCloudAPI,
         'key': process.env.SOUNDCLOUD_KEY,
-        'public': false
+        'public': true
     },
     [DOMAIN_TYPES.FACEBOOK]: {
         'API': FacebookAPI,
