@@ -42,4 +42,6 @@ export default class BaseAPI {
     static fetchPlaylist(params) {}
     static fetchStream(params) {}
 
+    static checkError(type, response) { return false; }
+
 }

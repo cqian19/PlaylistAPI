@@ -18,4 +18,10 @@ export class APIManager {
         const response =  API.getResource(type, params);
         return response ? response : new Error("Resource cannot be requested from this domain");
     }
+
+    static checkError(domain, type, response) {
+        const domainProps = DOMAIN_PROPS[domain];
+        const API = domainProps.API;
+        return API.checkError(type, response);
+    }
 }

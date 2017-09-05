@@ -11,6 +11,10 @@ export class YoutubeAPI extends BaseAPI {
 
     static DOMAIN_TYPE = DOMAIN_TYPES.YOUTUBE;
 
+    static checkError(type, response) {
+        return response.data['pageInfo']['totalResults'] === 0;
+    }
+
     /**
      * @param params.id -- Youtube video id
      * @returns {AxiosPromise}

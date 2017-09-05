@@ -54,7 +54,11 @@ router.get('/:domain/:type', function(req, res) {
         });
     } else if (response instanceof Promise) {
         response.then(function(response) {
-            res.json(response.data);
+            if (APIManager.checkError(domain, type, response)) {
+                res.status(500).send("Item retrieval failed. Does it exist?");
+            } else {
+                res.json(response.data);
+            }
         }, function(error) {
             res.status(500).send(error.message)
         });
